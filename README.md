@@ -24,3 +24,23 @@ conda activate medibot
 pip install -r requirements.txt
 ```
 
+### setup environment variables
+Create a `.env` file in the root directory and add the following (replace with your actual keys):
+
+```bash
+#finally run the following command
+python app.py
+```
+
+```bash
+open up localhost:
+```
+
+
+###techstack used:
+
+- Python
+- LangChain
+- Flask
+- Generative AI
+- Pinecone
