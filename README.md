@@ -2,12 +2,14 @@
 
 #how to run?
 
-Clone Repository
+
 
 ### steps:
 
 ```bash
-Project repo: https://github.com/
+Clone Repository
+Project repo: https://github.com/NithiCreate/Medical-chatbot.git
+cd Medical-chatbot
 ```
 
 ### create conda environment after opening repository
@@ -25,21 +27,20 @@ pip install -r requirements.txt
 ```
 
 ### setup environment variables
-Create a `.env` file in the root directory and add the following (replace with your actual keys):
+GEMINI_API_KEY=your_gemini_api_key
+PINECONE_API_KEY=your_pinecone_api_key
 
+### run the app
 ```bash
-#finally run the following command
 python app.py
 ```
 
-```bash
-open up localhost:
-```
+Open in browser: http://127.0.0.1:8080
 
 
 ###techstack used:
 
-- Python
+- Python 3.10
 - LangChain
 - Flask
 - Generative AI
