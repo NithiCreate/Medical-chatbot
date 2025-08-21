@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* ✅ Minimal CSS fix inside HTML */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh; /* Full screen */
+    }
+
+    .chat-header {
+      padding: 10px;
+      background: #444;
+      color: #fff;
+      text-align: center;
+    }
+
+    .chat-box {
+      flex: 1; /* Take up remaining space */
+      overflow-y: auto; /* Enable scrolling */
+      padding: 10px;
+      background: #f9f9f9;
+    }
+
+    .chat-form {
+      display: flex;
+      padding: 10px;
+      background: #eee;
+    }
+
+    .chat-form input {
+      flex: 1;
+      padding: 8px;
+    }
+
+    .chat-form button {
+      padding: 8px 15px;
+    }
+
+    .chat-message {
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 5px;
+      max-width: 75%;
+    }
+
+    .chat-message.user {
+      background: #32636d;
+      align-self: flex-end;
+    }
+
+    .chat-message.bot {
+      background: #bebebc;
+      align-self: flex-start;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>AI Chatbot</h2>
+    </div>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <form id="chat-form" class="chat-form">
+      <input type="text" id="msg" name="msg" placeholder="Type your message..." required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("chat-form");
+    const chatBox = document.getElementById("chat-box");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const msgInput = document.getElementById("msg");
+      const userMsg = msgInput.value.trim();
+      if (!userMsg) return;
+
+      // Show user message
+      chatBox.innerHTML += `<div class="chat-message user">${userMsg}</div>`;
+      msgInput.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Send to Flask backend
+      const formData = new FormData();
+      formData.append("msg", userMsg);
+
+      const response = await fetch("/get", {
+        method: "POST",
+        body: formData
+      });
+
+      const botReply = await response.text();
+
+      // Show bot response
+      chatBox.innerHTML += `<div class="chat-message bot">${botReply}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>

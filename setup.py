@@ -4,7 +4,7 @@ setup(
 	name = 'Generative AI Project',
 	version = '0.0.0',
 	author ='NithiCreate',
-	author_email = 'shantahswetha1@gamil.com',
+	author_email = 'shanthaswetha1@gamil.com',
 	packages = find_packages(),
 	install_requires = []
 )
